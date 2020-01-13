@@ -1,0 +1,93 @@
+http://www.cyberciti.biz/faq/fedora-rhel-install-cacti-monitoring-rrd-software/
+
+http://docs.cacti.net/plugins
+
+Disable Firewalld
+
+To disable firewalld, run the following command as root:
+
+systemctl disable firewalld
+Stop Firewalld
+
+To stop firewalld, run the following command as root:
+
+systemctl stop firewalld
+Check the Status of Firewalld
+
+To check the status of firewalld, run the following command as root:
+
+systemctl status firewalld
+
+Installing Apache2
+
+Apache2 is available as a Fedora package, therefore we can install it like this:
+
+yum install httpd
+
+Now configure your system to start Apache at boot time...
+
+systemctl enable httpd.service
+
+... and start Apache:
+
+systemctl start httpd.service
+
+
+
+ Installing MySQL/MariaDB 5
+
+To install MariaDB, we do this:
+
+yum install mariadb mariadb-server
+
+Then we create the system startup links for MariaDB (so that MariaDB starts automatically whenever the system boots) and start the MariaDB server:
+
+systemctl enable mariadb.service
+
+Further start the service of mysql
+
+systemctl start mariadb.service
+
+Run
+
+mysql_goweekend_installation
+
+to set a password for the user root (otherwise anybody can access your MySQL database!):
+
+[root@server1 ~]# mysql_goweekend_installation
+
+
+
+Installing PHP5
+
+We can install PHP5 and the Apache PHP5 module as follows:
+
+yum install php
+
+We must restart Apache afterwards:
+
+systemctl restart httpd.service
+
+ Getting MySQL Support In PHP5
+
+To get MySQL support in PHP, we can install the php-mysql package. It's a good idea to install some other PHP5 modules as well as you might need them for your applications. You can search for available PHP5 modules like this:
+
+yum search php
+
+Pick the ones you need and install them like this:
+
+yum install php-mysqlnd php-mssql php-opcache
+
+Now restart Apache2:
+
+systemctl restart httpd.service
+
+http://cacti.goweekend.ca/phpmyadmin
+
+
+disable SELinux
+# /usr/sbin/sestatus
+# /usr/sbin/getenforce
+
+Disable SeLinux in /etc/selinux/config
+SELINUX=disabled
